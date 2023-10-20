@@ -17,25 +17,25 @@ final class FutureData<T> {
 }
 
 class FutureBuilder<T> extends Rview {
-  Future<T> future;
-  T? initialValue;
-  bool _isCompleted = false;
-  FutureData<T>? data = FutureData();
-  Relement Function(FutureData<T>? data) builder;
+  final Future<T> future;
+  final T? initialValue;
+  //bool _isCompleted = false;
+  final FutureData<T> futureData = FutureData();
+  final Relement Function(FutureData<T> data) builder;
   Relement _relement = SizeBox();
   FutureBuilder(
       {required this.future, required this.builder, this.initialValue});
 
   @override
   void initState() {
-    _isCompleted = false;
+    //_isCompleted = false;
 
-    _relement = builder.call(data);
+    _relement = builder.call(futureData);
 
     future.then((value) {
-      data?.data = value;
-      _relement = builder(data);
-      _isCompleted = true;
+      futureData.data = value;
+      _relement = builder(futureData);
+      //_isCompleted = true;
       setState(() {});
     });
     super.initState();
