@@ -31,7 +31,9 @@ class FutureBuilder<T> extends Rview {
     //_isCompleted = false;
 
     _relement = builder.call(futureData);
-
+    setState(
+      () {},
+    );
     future.then((value) {
       futureData.data = value;
       _relement = builder(futureData);
