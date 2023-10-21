@@ -1,7 +1,7 @@
 import 'package:rdart/rviews.dart';
 
-final class FutureData<T> {
-  FutureData();
+final class StreamData<T> {
+  StreamData();
   T? _data;
 
   bool _hasData = false;
@@ -17,15 +17,15 @@ final class FutureData<T> {
   }
 }
 
-class FutureBuilder<T> extends Rview {
-  final Future<T> future;
+class StreamBuilder<T> extends Rview {
+  final Stream<T> stream;
   final T? initialValue;
   //bool _isCompleted = false;
-  final FutureData<T> futureData = FutureData();
-  final Relement Function(FutureData<T> data) builder;
+  final StreamData<T> futureData = StreamData();
+  final Relement Function(StreamData<T> data) builder;
   Relement _relement = SizeBox();
-  FutureBuilder(
-      {required this.future, required this.builder, this.initialValue});
+  StreamBuilder(
+      {required this.stream, required this.builder, this.initialValue});
 
   @override
   void initState() {
@@ -35,8 +35,8 @@ class FutureBuilder<T> extends Rview {
     setState(
       () {},
     );
-    future.then((value) {
-      futureData.data = value;
+    stream.listen((event) {
+      futureData.data = event;
       _relement = builder(futureData);
       //_isCompleted = true;
       setState(() {});
